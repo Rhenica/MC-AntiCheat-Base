@@ -51,19 +51,15 @@ public class PacketListener implements Listener {
                     ProtocolLibrary.getProtocolManager().addPacketListener(new PacketAdapter(AntiCheat.getInstance(), ListenerPriority.NORMAL, packetType) {
                         @Override
                         public void onPacketReceiving(PacketEvent e) {
-                            if (e.isServerPacket()) {
-                                onPacketReceive(e.getPlayer(), e.getPacket());
-                            }
+                            onPacketReceive(e.getPlayer(), e.getPacket());
                         }
                     });
                 }
                 if (packetType.isServer()) {
                     ProtocolLibrary.getProtocolManager().addPacketListener(new PacketAdapter(AntiCheat.getInstance(), ListenerPriority.NORMAL, packetType) {
                         @Override
-                        public void onPacketReceiving(PacketEvent e) {
-                            if (e.isServerPacket()) {
-                                onPacketSend(e.getPlayer(), e.getPacket());
-                            }
+                        public void onPacketSending(PacketEvent e) {
+                            onPacketSend(e.getPlayer(), e.getPacket());
                         }
                     });
                 }
