@@ -82,7 +82,7 @@ public class PacketListener implements Listener {
     }
 
     public void onFlying(Player player, PacketEvent event) {
-        PlayerLocation loc = lastLocs.get(player);
+        PlayerLocation loc = locs.get(player);
         lastLocs.put(player, loc);
         locs.put(player, loc);
         MoveEvent e = new MoveEvent(player, loc, loc, event.getPacket().getBooleans().read(0));
@@ -92,7 +92,7 @@ public class PacketListener implements Listener {
     }
 
     public void onPosition(Player player, PacketEvent event) {
-        PlayerLocation from = lastLocs.get(player);
+        PlayerLocation from = locs.get(player);
         PlayerLocation to = new PlayerLocation(event.getPacket().getDoubles().read(0), event.getPacket().getDoubles().read(1), event.getPacket().getDoubles().read(2), from.getYaw(), from.getPitch());
         lastLocs.put(player, from);
         locs.put(player, to);
@@ -103,7 +103,7 @@ public class PacketListener implements Listener {
     }
 
     public void onLook(Player player, PacketEvent event) {
-        PlayerLocation from = lastLocs.get(player);
+        PlayerLocation from = locs.get(player);
         PlayerLocation to = new PlayerLocation(from.getX(), from.getY(), from.getZ(), event.getPacket().getFloat().read(0), event.getPacket().getFloat().read(1));
         lastLocs.put(player, from);
         locs.put(player, to);
@@ -114,7 +114,7 @@ public class PacketListener implements Listener {
     }
 
     public void onPosLook(Player player, PacketEvent event) {
-        PlayerLocation from = lastLocs.get(player);
+        PlayerLocation from = locs.get(player);
         PlayerLocation to = new PlayerLocation(event.getPacket().getDoubles().read(0), event.getPacket().getDoubles().read(1), event.getPacket().getDoubles().read(2), event.getPacket().getFloat().read(0), event.getPacket().getFloat().read(1));
         lastLocs.put(player, from);
         locs.put(player, to);
